@@ -5,11 +5,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Pengehullet</title>
+  <title>Pengehulconst</title>
   <meta name="description" content="What could have been">
   <meta name="author" content="ntop">
 
-  <meta property="og:title" content="Pengehullet">
+  <meta property="og:title" content="Pengehulconst">
   <meta property="og:type" content="website">
   <meta property="og:description" content="What could have been">
   <style>
@@ -70,17 +70,17 @@
   
   
   <script>
-    let startDate = new Date('2020-06-01')
-    let interest = 1.07;
-    let pension = 1.08
-    let projectionYears = 30;
-    let startSalary = 30000;
-    let idealSalary = 39000;
-    let workingMonths = (new Date().getMonth() - startDate.getMonth()) + ((new Date().getFullYear() - startDate.getFullYear()) * 12)
-    let expectedSalary = workingMonths * idealSalary;
-    let actualSalary = startSalary * workingMonths;
-    let lostEarnings = expectedSalary - actualSalary;
-    let lostEarningsWithPension = (expectedSalary * pension) - actualSalary;
+    const startDate = new Date('2020-06-01')
+    const interest = 1.07;
+    const pension = 1.08
+    const projectionYears = 30;
+    const startSalary = 30000;
+    const idealSalary = 39000;
+    const workingMonths = (new Date().getMonth() - startDate.getMonth()) + ((new Date().getFullYear() - startDate.getFullYear()) * 12)
+    const expectedSalary = workingMonths * idealSalary;
+    const actualSalary = startSalary * workingMonths;
+    const lostEarnings = expectedSalary - actualSalary;
+    const lostEarningsWithPension = (expectedSalary * pension) - actualSalary;
     document.getElementById('nomoney').innerHTML += (lostEarnings.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."))
     document.getElementById('nomoneypension').innerHTML += (lostEarningsWithPension.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."))
     document.getElementById('nomoneyinvested').innerHTML += (Math.trunc(lostEarnings * Math.pow(interest, projectionYears))).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
