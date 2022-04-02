@@ -58,33 +58,33 @@
       <h1>Tabte Penge</h1>
     </div>
     <div>
-      <h1 id="nomoney">Uden pension: </h1>
+      <h1 id="nomoney"></h1>
     </div>
     <div>
-      <h1 id="nomoneypension">Med pension: </h1>
-    </div>
-    <div>
-      <h1 id="nomoneyinvested">Investeret efter 30 år: </h1>
+      <h1 id="nomoneypension"></h1>
     </div>
   </div>
   
   
   <script>
-    const startDate = new Date('2020-06-01')
-    const interest = 1.07;
-    const pension = 1.08
-    const projectionYears = 30;
+    var startDateUnix = Math.floor(new Date('2020-06-01') / 1000)
     const startSalary = 30000;
     const idealSalary = 39000;
-    const workingMonths = (new Date().getMonth() - startDate.getMonth()) + ((new Date().getFullYear() - startDate.getFullYear()) * 12)
-    const expectedSalary = workingMonths * idealSalary;
-    const actualSalary = startSalary * workingMonths;
-    const lostEarnings = expectedSalary - actualSalary;
-    const lostEarningsWithPension = (expectedSalary * pension) - actualSalary;
-    document.getElementById('nomoney').innerHTML += (lostEarnings.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."))
-    document.getElementById('nomoneypension').innerHTML += (lostEarningsWithPension.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."))
-    document.getElementById('nomoneyinvested').innerHTML += (Math.trunc(lostEarnings * Math.pow(interest, projectionYears))).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-    console.log(lostEarnings)
+    var startMoneyPerSecond = startSalary / (30*24*60*60)    
+    var idealMoneyperSecond = idealSalary / (30*24*60*60)
+    
+    setInterval(doShit, 1000);
+
+    function doShit() {
+      const pension = 1.08
+      const now = Math.floor(new Date() / 1000)      
+      const expectedSalary = idealMoneyperSecond * (now - startDateUnix);
+      const actualSalary = startMoneyPerSecond * (now - startDateUnix);
+      const lostEarnings = expectedSalary - actualSalary;
+      const lostEarningsWithPension = (expectedSalary * pension) - actualSalary;
+      document.getElementById('nomoney').innerHTML = "Uden pension: " + lostEarnings.toFixed(4) + " DKK"
+      document.getElementById('nomoneypension').innerHTML = "Med pension: " + lostEarningsWithPension.toFixed(4) + " DKK"
+    }
   </script>
 </body>
 </html>
