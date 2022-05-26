@@ -67,23 +67,35 @@
   
   
   <script>
-    var startDateUnix = Math.floor(new Date('2020-06-01') / 1000)
-    const startSalary = 30000;
-    const idealSalary = 39000;
-    var startMoneyPerSecond = startSalary / (30*24*60*60)    
-    var idealMoneyperSecond = idealSalary / (30*24*60*60)
+    var firstSalaryDate = Math.floor(new Date('2020-06-01') / 1000)
+    var secondSalaryDate = Math.floor(new Date('2022-05-25') / 1000)
+    const firstSalary = 30000;
+    const firstIdealSalary = 39000;
+    const secondSalary = 34000;
+    const secondIdealSalary = 41000;
     
     setInterval(doShit, 1000);
 
     function doShit() {
       const pension = 1.08
       const now = Math.floor(new Date() / 1000)      
-      const expectedSalary = idealMoneyperSecond * (now - startDateUnix);
-      const actualSalary = startMoneyPerSecond * (now - startDateUnix);
-      const lostEarnings = expectedSalary - actualSalary;
-      const lostEarningsWithPension = (expectedSalary * pension) - actualSalary;
+      const firstExpectedEarnings = calculate_earnings(firstSalaryDate, secondSalaryDate, firstIdealSalary) // idealMoneyperSecond * (newStartDateUnix - startDateUnix);
+      const firstActualEarnings = calculate_earnings(firstSalaryDate, secondSalaryDate, firstSalary)
+      const secondExpectedEarnings = calculate_earnings(secondSalaryDate, now, secondIdealSalary)
+      const secondActualEarnings = calculate_earnings(secondSalaryDate, now, secondSalary)
+
+      const totalExpectedEarnings = firstExpectedEarnings + secondExpectedEarnings
+      const totalActualEarnings = firstActualEarnings + secondActualEarnings
+
+      const lostEarnings = totalExpectedEarnings - totalActualEarnings;
+      const lostEarningsWithPension = (totalExpectedEarnings * pension) - totalActualEarnings;
       document.getElementById('nomoney').innerHTML = "Uden pension: " + lostEarnings.toFixed(4) + " DKK"
       document.getElementById('nomoneypension').innerHTML = "Med pension: " + lostEarningsWithPension.toFixed(4) + " DKK"
+    }
+
+    function calculate_earnings(from, to, monthly_earning) {
+      const moneyPerSecond = monthly_earning / (30 * 24 * 60 * 60)
+      return (to - from) * moneyPerSecond        
     }
   </script>
 </body>
