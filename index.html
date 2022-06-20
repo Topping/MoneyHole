@@ -61,7 +61,13 @@
       <h1 id="nomoney"></h1>
     </div>
     <div>
+      <h1 id="nomoney-snits"></h1>
+    </div>
+    <div>
       <h1 id="nomoneypension"></h1>
+    </div>
+    <div>
+      <h1 id="nomoneypension-snits"></h1>
     </div>
   </div>
   
@@ -88,9 +94,13 @@
       const totalActualEarnings = firstActualEarnings + secondActualEarnings
 
       const lostEarnings = totalExpectedEarnings - totalActualEarnings;
+      const lostSnits = (lostEarnings / 12) * 5
       const lostEarningsWithPension = (totalExpectedEarnings * pension) - totalActualEarnings;
+      const lostSnitsWitPension = (lostEarningsWithPension / 12) * 5
       document.getElementById('nomoney').innerHTML = "Uden pension: " + lostEarnings.toFixed(4) + " DKK"
+      document.getElementById('nomoney-snits').innerHTML = "Uden pension: " + lostSnits.toFixed(1) + " Mælkesnitter"
       document.getElementById('nomoneypension').innerHTML = "Med pension: " + lostEarningsWithPension.toFixed(4) + " DKK"
+      document.getElementById('nomoneypension-snits').innerHTML = "Med pension: " + lostSnitsWitPension.toFixed(1) + " Mælkesnitter"
     }
 
     function calculate_earnings(from, to, monthly_earning) {
